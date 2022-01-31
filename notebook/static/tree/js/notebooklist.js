@@ -600,6 +600,11 @@ define([
             .addClass('pull-right')
             .appendTo(item);
 
+        $('<span/>')
+            .addClass('item_owner')
+            .addClass('pull-left')
+            .appendTo(div);
+
         var buttons = $('<div/>')
             .addClass("item_buttons pull-left")
             .appendTo(div);
@@ -879,10 +884,12 @@ define([
         var that = this;
         var running = (model.type === 'notebook' && this.sessions[model.path] !== undefined);
         item.data('name',model.name);
+        item.data('owner', model.owner);
         item.data('path', model.path);
         item.data('modified', model.last_modified);
         item.data('type', model.type);
         item.find(".item_name").text(bidi.applyBidi(model.name));
+        item.find(".item_owner").text(model.owner);
         var icon = NotebookList.icons[model.type];
         if (running) {
             icon = 'running_' + icon;

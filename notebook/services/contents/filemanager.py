@@ -7,6 +7,7 @@ from datetime import datetime
 import errno
 import io
 import os
+import pwd
 import shutil
 import stat
 import sys
@@ -283,6 +284,12 @@ class FileContentsManager(FileManagerMixin, ContentsManager):
         except OSError:
             self.log.error("Failed to check write permissions on %s", os_path)
             model['writable'] = False
+        try:
+            model['owner'] = pwd.getpwuid(info.st_uid).pw_name if info.st_uid else None
+        except (KeyError, OSError):
+            self.log.error("Failed to get owner name for %s", os_path)
+            model['owner'] = None
+
         return model
 
     def _dir_model(self, path, content=True):
