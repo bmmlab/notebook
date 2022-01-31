@@ -31,7 +31,6 @@ data-server-root="{{server_root}}"
       <ul id="tabs" class="nav nav-tabs">
         <li class="active"><a href="#notebooks" data-toggle="tab">{% trans %}Files{% endtrans %}</a></li>
         <li><a href="#running" data-toggle="tab">{% trans %}Running{% endtrans %}</a></li>
-        <li><a href="#clusters" data-toggle="tab" class="clusters_tab_link" >{% trans %}Clusters{% endtrans %}</a></li>
       </ul>
       <div class="tab-content">
         <div id="notebooks" class="tab-pane active">
@@ -165,6 +164,7 @@ data-server-root="{{server_root}}"
             </div>
           </div>
           <div class="panel-group" id="accordion" >
+            {% if terminals_available %}
             <div class="panel panel-default">
               <div class="panel-heading">
                 <a data-toggle="collapse" data-target="#collapseOne" href="#">
@@ -185,6 +185,7 @@ data-server-root="{{server_root}}"
                 </div>
               </div>
             </div>
+            {% endif %}
             <div class="panel panel-default">
               <div class="panel-heading">
                 <a data-toggle="collapse" data-target="#collapseTwo" href="#">
@@ -202,10 +203,6 @@ data-server-root="{{server_root}}"
               </div>
             </div>
           </div>
-        </div>
-        <div id="clusters" class="tab-pane">
-          {% trans %}Clusters tab is now provided by IPython parallel.{% endtrans %}
-          {% trans %}See '<a href="https://github.com/ipython/ipyparallel">IPython parallel</a>' for installation details.{% endtrans %}
         </div>
       </div><!-- class:tab-content -->
     </div><!-- id:tab_content -->
