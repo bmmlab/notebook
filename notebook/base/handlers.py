@@ -517,11 +517,19 @@ class IPythonHandler(AuthenticatedHandler):
     
     @property
     def template_namespace(self):
+        css_classes = ' '.join(self.settings.get('config', {})
+                               .get('NotebookApp', {})
+                               .get('service_header_css', {})
+                               .get(os.environ.get('JUPYTERHUB_SERVICE_NAME', ''), [])
+                               )
         return dict(
             base_url=self.base_url,
             default_url=self.default_url,
             ws_url=self.ws_url,
             logged_in=self.logged_in,
+            is_service=bool(os.environ.get('JUPYTERHUB_SERVICE_NAME', False)),
+            service_header_css=css_classes,
+            service_name=os.environ.get('JUPYTERHUB_SERVICE_NAME', ''),
             allow_password_change=self.settings.get('allow_password_change'),
             login_available=self.login_available,
             token_available=bool(self.token),

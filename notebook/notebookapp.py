@@ -1237,6 +1237,16 @@ class NotebookApp(JupyterApp):
         help=_("Extra variables to supply to jinja templates when rendering."),
     )
 
+    service_header_css = Dict(
+        List(Unicode()),
+        config=True,
+        help="""Dict of 'service_name': ['css_class_1', 'css_class_2'] to use
+
+        in header of services page. These services must already exist.
+        'service_name' corresponds to the name of a JupyterHub service.
+        """
+    )
+
     enable_mathjax = Bool(True, config=True,
         help="""Whether to enable MathJax for typesetting math/TeX
 
